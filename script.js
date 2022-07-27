@@ -1,7 +1,7 @@
 document.body.onload = () => {
-	initializeContentArray = () => {
-		let articles = [
-			`		<article><h2  class="content-heading">Карп</h2>
+    initializeContentArray = () => {
+        let articles = [
+            `		<article><h2  class="content-heading">Карп</h2>
 			<a
 				title="USFWS, Public domain, via Wikimedia Commons"
 				href="https://commons.wikimedia.org/wiki/File:Common_carp.jpg"
@@ -23,7 +23,7 @@ document.body.onload = () => {
 				тоже нужно учитывать жирность и добавлять специи, лучше сильно-острые и лимонные.
 			</section>
         </article>`,
-			`		<article>
+            `		<article>
     <h2  class="content-heading">Белый амур</h2>
     <a
         title="Hagerty, Ryan/USFWS, Public domain, via Wikimedia Commons"
@@ -44,7 +44,7 @@ document.body.onload = () => {
         масло, а при жарке нарезать толстыми стейками, т.к. рыба сама по себе сухая.
     </section>
 </article>`,
-			`		<article>
+            `		<article>
     <h2  class="content-heading">Щука</h2>
     <img class="content-img" alt="pike on grass" src="./img/pike.jpg" />
     <section>
@@ -59,7 +59,7 @@ document.body.onload = () => {
         лучше запекать или тушить.
     </section>
 </article>`,
-			`
+            `
     <article>
         <h2  class="content-heading">Сом</h2>
         <img class="content-img" src="./img/catfish.jpg" alt="catfish">
@@ -74,7 +74,7 @@ document.body.onload = () => {
             сгоревшей в уголь кожей тоже норм, т.к. её далеко не все едят.
         </section>
     </article>`,
-			`		<article>
+            `		<article>
     <h2  class="content-heading">Карась</h2>
     <a title="jag asså, Public domain, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Carassius_carassius_1.jpg"><img class="content-img" alt="Carassius carassius 1" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Carassius_carassius_1.jpg/512px-Carassius_carassius_1.jpg"></a>
     <section>
@@ -91,44 +91,46 @@ document.body.onload = () => {
         запеченый с майонезом, сметаной и зеленью.
     </section>
 </article>`,
-		]
-		let cashedArticles = []
-		let fishNames = ["carp", "grassCarp", "pike", "catfish", "carassius"]
-		fishNames.forEach((fishName) => cashedArticles.push([fishName, document.createElement("div")]))
-		cashedArticles.forEach((contentItem, i) => {
-			contentItem[1].classList.add(contentItem[0], "content")
-            contentItem[1].insertAdjacentHTML('afterbegin', articles[i]);
-		})
-		return cashedArticles
-	}
+        ];
+        let cashedArticles = [];
+        let fishNames = ["carp", "grassCarp", "pike", "catfish", "carassius"];
+        fishNames.forEach((fishName) =>
+            cashedArticles.push([fishName, document.createElement("div")])
+        );
+        cashedArticles.forEach((contentItem, i) => {
+            contentItem[1].classList.add(contentItem[0], "content");
+            contentItem[1].insertAdjacentHTML("afterbegin", articles[i]);
+        });
+        return cashedArticles;
+    };
 
-	let contentArticles = initializeContentArray()
+    let contentArticles = initializeContentArray();
 
-	let main = document.querySelector(".main")
-	let temporaryFragment = document.createDocumentFragment()
-	contentArticles.forEach((item) => {
-		temporaryFragment.appendChild(item[1])
-	})
-	main.appendChild(temporaryFragment)
+    let main = document.querySelector(".main");
+    let temporaryFragment = document.createDocumentFragment();
+    contentArticles.forEach((item) => {
+        temporaryFragment.appendChild(item[1]);
+    });
+    main.appendChild(temporaryFragment);
 
-	let navClickHandle = ({ target }) => {
-		if (target.tagName === "INPUT") {
-			let checkedNode = document.querySelector(`.${target.id}`)
-			if (checkedNode) {
-				document.querySelectorAll(".content").forEach((contentItem) => {
-					contentItem.classList.remove("visible-content")
-				})
-				checkedNode.classList.add("visible-content")
-			}
-		}
-	}
+    let navClickHandle = ({ target }) => {
+        if (target.tagName === "INPUT") {
+            let checkedNode = document.querySelector(`.${target.id}`);
+            if (checkedNode) {
+                document.querySelectorAll(".content").forEach((contentItem) => {
+                    contentItem.classList.remove("visible-content");
+                });
+                checkedNode.classList.add("visible-content");
+            }
+        }
+    };
 
-	let navMenu = document.querySelector(".nav-menu")
-	navMenu.addEventListener("click", navClickHandle)
+    let navMenu = document.querySelector(".nav-menu");
+    navMenu.addEventListener("click", navClickHandle);
 
     let initRadio = document.querySelector(".nav-radio");
-    console.log(initRadio)
-    if(initRadio){
-        initRadio.click()
+    console.log(initRadio);
+    if (initRadio) {
+        initRadio.click();
     }
-}
+};
